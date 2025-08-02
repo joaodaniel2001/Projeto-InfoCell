@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %} Datasytem InfoCell {% endblock %}
+
+{% block head%}
+<link rel="stylesheet" href="{{ url_for ('static', filename='css/index.css')}}">
+{% endblock %}
+
+{% block content %}
+
+<!-- HEADER -->
+<header id="header">
+    <div class="flex">
+        
+        <!-- Logo -->
+        <p> DataSystem InfoCell </p>
+        
+        <!-- Opções -->
+        <nav>
+            <ul>
+                <li><a href="#"> Home </a></li>
+                <li><a href="#"> Produtos </a></li>
+                <li><a href="#"> Sobre nós </a></li>
+                <li><a href="" class="btn btn-outline-dark"> Contato </a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+{% endblock %}
