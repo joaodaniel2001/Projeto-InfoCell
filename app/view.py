@@ -8,7 +8,11 @@ from flask_login import login_user, logout_user, current_user, login_required
 # Tela inicial
 @app.route ('/', methods=['GET', 'POST'])
 def homepage ():
-    return render_template ("index.html")
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = form.login ()
+        login_user(user, remember=True)
+    return render_template ("index.html", form=form)
 
 # Página de Cadastro
 @app.route ('/cadastro', methods=['GET', 'POST'])
