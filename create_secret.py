@@ -1,6 +1,5 @@
-
 import secrets
 
-sk = secrets.token_hex(24)
+sk = secrets.token_hex(24) # quantidade de caracteres
 
-print(sk)
+print (sk)

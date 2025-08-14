@@ -57,3 +57,4 @@ class LoginForm (FlaskForm):
             
         else:
             raise Exception ('Usuário não encontrado!')
+

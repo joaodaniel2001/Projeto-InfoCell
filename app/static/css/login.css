@@ -1,0 +1,26 @@
+@import url("global.css");
+
+.cont-Login {
+  width: 40%;
+  height: 100vh;
+  padding: 100px;
+  color: #000;
+}
+
+.cont-Imagem {
+  width: 60%;
+  height: 100vh;
+  background-image: url("../img/fundo02.jpg");
+  justify-content: flex-end;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.cont-Login a {
+  color: blue;
+}
+
+.cont-Login img {
+  width: 8vw;
+  border-radius: 100%;
+}

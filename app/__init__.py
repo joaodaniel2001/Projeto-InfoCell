@@ -1,5 +1,4 @@
 
-# Bibliotecas
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -15,13 +14,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['UPLOAD_FILES'] = r'static/data'
-
-# Comando BD
+ 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 login_manager = LoginManager (app)
-login_manager.login_view = 'homepage'
-bcrypt = Bcrypt (app)
+login_manager.login_view = 'Homepage'
+bcrypt = Bcrypt(app)
  
-from app.view import homepage
+from app.view import Homepage

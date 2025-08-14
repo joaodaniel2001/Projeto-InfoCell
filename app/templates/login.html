@@ -1,0 +1,52 @@
+
+{% extends "base.html" %}
+
+{% block title %} Login {% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<main style="display: flex;">
+    <section class="cont-Login">
+
+        <div class="row justify-content-center align-items-center p-5">
+            <img src="{{url_for('static', filename='img/logo-preto.png')}}" alt="logo">
+        </div>
+
+        <div class="text-center">
+            <h1><strong>Dia dos pais</strong></h1>
+            <h3>Login</h3>
+        </div>
+
+        <form action="" method="post" class="row mt-4 p-4 round">
+
+            {{form.csrf_token}}
+
+            {{form.email.label()}}
+            {{form.email(class="form-control")}}
+
+            {{form.senha.label()}}
+            {{form.senha(class="form-control")}}
+
+            {{form.btnSubmit(class="btn btn-primary col-12 mt-3")}}
+
+        </form>
+
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-auto d-flex">
+                    <span>Não tem cadastro?</span>
+                    <a href="{{url_for('Register')}}"><span style="color: blue;">Clique aqui</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="cont-Imagem">
+
+    </section>
+</main>
+
+{% endblock %}
