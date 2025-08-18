@@ -1,128 +1,111 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  header {
-    position: fixed;
-    top: 0;
-    height: auto;
-    width: 100%;
-    background: #fff;
-    color: #000;
-    box-sizing: border-box;
-    box-shadow: 0 0 15px 0.5px #000;
-  }
-  
-  .flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  /* Logo */
-  .flex p {
-    font-weight: bold;
-    font-size: 20px;
-  }
-  
-  /* Menu */
-  header nav {
-    display: flex;
-  }
-  
-  header ul {
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-  }
-  
-  header ul li {
-    margin: 0 1.5vw;
-    padding: 0;
-  }
-  
-  header ul li a {
-    color: #000;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    padding: 5px 8px;
-    border-radius: 6px;
-    transition: 0.3s;
-  }
-  
-  header ul li a:hover {
-    background-color: #ccc;
-  }
-  
-  header i {
-    font-size: 20px;
-    margin-right: 6px;
-  }
-  
-  /* Botão Contato */
-  .botao-header {
-    background-color: #ccc;
-    border: 2px solid #000;
-    padding: 6px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 15px;
-    transition: 0.3s;
-    border: none;
-  }
-  
-  .botao-header:hover {
-    background-color: #000;
-    color: #fff;
-  }
-  
-  .botao-header i {
-    font-size: 18px;
-  }
-  
-  /* Login */
-  #login {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px 20px;
-    transition: 0.4s;
-  }
-  
-  #login i {
-    font-size: 30px;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-  }
-  
-  #login a,
-  span {
-    font-size: 20px;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #000;
-    padding: 10px;
-  }
-  
-  .emCima:hover {
-    background-color: #ccc;
-    border-radius: 5px;
-  }
-  
-  #login span.nome-usuario {
-    max-width: 150px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 15px 0.5px #000;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+}
+
+.flex {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Logo */
+.flex p {
+  font-weight: bold;
+  font-size: 20px;
+  justify-self: start;
+}
+
+/* Menu */
+.flex nav {
+  justify-self: center;
+}
+
+header nav ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+header ul li a {
+  color: #000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+header ul li a:hover {
+  background-color: #ccc;
+}
+
+header i {
+  font-size: 20px;
+  margin-right: 6px;
+}
+
+.nome-usuario {
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Login */
+#login {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#login i {
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+}
+
+#login a,
+#login span {
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+  padding: 6px 8px;
+}
+
+#login .emCima:hover {
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+#login span.nome-usuario {
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
