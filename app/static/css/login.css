@@ -1,17 +1,23 @@
 @import url("global.css");
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .cont-Login {
   width: 40%;
-  height: 100vh;
-  padding: 100px;
+  min-height: calc(100vh - 16vh);
+  padding: 50px;
   color: #000;
+  box-sizing: border-box;
 }
 
 .cont-Imagem {
   width: 60%;
-  height: 100vh;
+  min-height: calc(100vh - 16vh);
   background-image: url("../img/fundo02.jpg");
-  justify-content: flex-end;
   background-size: cover;
   background-repeat: no-repeat;
 }

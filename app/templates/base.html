@@ -19,37 +19,54 @@
 </head>
 
 <body>
-    <!-- HEADER -->
-    <header id="header">
-        <div class="flex">
-            <!-- Logo -->
-            <p>Datasystem InfoCell</p>
 
-            <!-- Menu -->
+    <header>
+
+        <section id="sup-Header">
+            <div class="flex">
+
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="{{ url_for ('Homepage') }}">
+                        <img src="{{ url_for ('static', filename='img/logo-preto.png')}}" alt="logo">
+                        <span>DATASYSTEM INFOCELL</span>
+                    </a>
+                </div>
+
+                <!-- Pesquisa -->
+
+
+                <!-- Login -->
+                <div id="login">
+                    {% if current_user.is_authenticated %}
+
+                    <i class="bi bi-person-circle"></i>
+                    <span class="nome-usuario">{{ current_user.nome }} {{ current_user.sobrenome }}</span>
+                    <span>|</span>
+                    <a class="emCima" href="{{ url_for('logout') }}">Sair</a>
+
+                    {% else %}
+
+                    <a class="emCima" href="{{ url_for('LoginPage') }}">
+                        <i class="bi bi-person-circle"></i>
+                        <span>Faça login</span>
+                    </a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </section>
+
+        <section id="low-Header">
             <nav>
                 <ul>
-                    <li><a href="{{ url_for('Homepage') }}"><i class="bi bi-house"></i> 1</a></li>
-                    <li><a href="{{ url_for('Homepage') }}"><i class="bi bi-house"></i> 2</a></li>
+                    <li><a href="{{ url_for('Homepage') }}"><i class="bi bi-house"></i> Página Inicial </a></li>
                     <li><a href="#"><i class="bi bi-cart"></i> Produtos</a></li>
                     <li><a href="#"><i class="bi bi-people"></i> Sobre nós</a></li>
                 </ul>
             </nav>
+        </section>
 
-            <!-- Login -->
-            <div id="login" class="rounded">
-                {% if current_user.is_authenticated %}
-                <i class="bi bi-person-circle"></i>
-                <span class="nome-usuario">{{ current_user.nome }} {{ current_user.sobrenome }}</span>
-                <span>|</span>
-                <a class="emCima" href="{{ url_for('logout') }}">Sair</a>
-                {% else %}
-                <a class="emCima" href="{{ url_for('LoginPage') }}">
-                    <i class="bi bi-person-circle"></i>
-                    <span>Faça login</span>
-                </a>
-                {% endif %}
-            </div>
-        </div>
     </header>
 
     <!-- Conteúdo dinâmico -->
