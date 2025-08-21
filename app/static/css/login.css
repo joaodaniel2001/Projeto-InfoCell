@@ -2,7 +2,6 @@
 
 .cont-Login {
   width: 40%;
-  min-height: calc(100vh - 16vh);
   padding: 50px;
   color: #000;
   box-sizing: border-box;
@@ -10,7 +9,6 @@
 
 .cont-Imagem {
   width: 60%;
-  min-height: calc(100vh - 16vh);
   background-image: url("../img/fundo02.jpg");
   background-size: cover;
   background-repeat: no-repeat;
