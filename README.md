@@ -8,6 +8,7 @@
 - [Bibliotecas usadas](#bibliotecas-usadas)
 - [Pasta .venv](#pasta-.venv)
 - [Comandos BD](#comandos-bd)
+- [Baixar bibliotecas automaticamente](#biblioteca-automatica)
 
 <br>
 
@@ -76,16 +77,22 @@ pip install flask-bcrypt
 pip install email-validator
 ```
 
-- **Python DoTenv**:
+- **Python DoTenv:** Carrega variáveis de ambiente de um arquivo .env, ajudando a gerenciar configurações sensíveis sem expô-las no código.
 
 ```bash
 pip install python-dotenv
 ```
 
+- **Gunicorn:** Servidor WSGI para aplicações Python, ideal para executar aplicações Flask em produção com múltiplos processos.
+
+```bash
+pip install gunicorn
+```
+
 - **Todas as bibliotecas:** permite carregar variáveis de ambiente a partir de um arquivo .env, facilitando a configuração de aplicativos sem expor informações sensíveis no código-fonte.
 
 ```bash
-pip install flask Flask-SQLAlchemy Flask-Migrate Flask-WTF flask-login flask-bcrypt email-validator python-dotenv
+pip install flask Flask-SQLAlchemy Flask-Migrate Flask-WTF flask-login flask-bcrypt email-validator python-dotenv gunicorn
 ```
 
 <br>
@@ -108,4 +115,21 @@ flask db migrate -m "mensagem"
 
 ```bash
 flask db upgrade
+```
+
+<br>
+
+<h3 id="biblioteca-automatica"> Baixar bibliotecas automaticamente </h3>
+
+- Para registrar todas as bibliotecas instaladas em seu ambiente virtual em um arquivo requirements.txt, utilize o seguinte comando no terminal:
+
+```bash
+// Baixa todas as bibliotecas atuais
+pip freeze > requirements.txt
+```
+
+- Sempre que instalar novas bibliotecas e quiser atualizar o arquivo, basta executar novamente o mesmo comando:
+
+```bash
+pip freeze > requirements.txt
 ```

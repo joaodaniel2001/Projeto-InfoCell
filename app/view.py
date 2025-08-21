@@ -20,6 +20,16 @@ def LoginPage ():
         return redirect(url_for('Homepage'))
     return render_template ("login.html", form=form)
 
+# Página de Produtos
+@app.route ('/produtos', methods=['GET', 'POST'])
+def Products ():
+    return render_template ("produtos.html")
+
+# Página de Sobre Nós
+@app.route ('/sobre-nos', methods=['GET', 'POST'])
+def AboutUs ():
+    return render_template ("sobreNos.html")    
+
 # Página de Cadastro
 @app.route ('/cadastro', methods=['GET', 'POST'])
 def Register ():
