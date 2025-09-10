@@ -1,3 +1,4 @@
+#Inicializa os pacotes
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -10,16 +11,14 @@ import os
 load_dotenv('.env')
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///biblioteca_db.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-app.config['UPLOAD_FILES'] = r'static/data'
- 
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-
-login_manager = LoginManager (app)
-login_manager.login_view = 'Homepage'
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
 bcrypt = Bcrypt(app)
- 
-from app.view import Homepage
+
+from app import views, models
