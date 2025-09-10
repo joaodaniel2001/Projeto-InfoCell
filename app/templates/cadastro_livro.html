@@ -3,42 +3,42 @@
 {% include "header.html" %}
 
 {% block content %}
-<div class="container-login w-100 flex justify-center align-center">
-    <section class="forms-login mt-[5rem] border-orange-500 border-[1px] p-10 rounded w-[500px]">
-                <h3 class="text-center text-3xl font-bold mt-4 text-orange-500">Cadastrar Livro</h3>
-                <form action="" method="post" class="flex flex-col">
-                    {{form.csrf_token}}
-                    {{ form.hidden_tag()}}
+<div class="d-flex justify-content-center align-items-center w-100 bg-dark" style="min-height: 100vh;">
+    <section class="border border-warning p-4 rounded" style="width: 500px; background-color: #212529;">
+        <h3 class="text-center text-warning fw-bold mb-4">Cadastrar Empréstimo</h3>
+        <form action="" method="post" class="d-flex flex-column">
+            {{ form.csrf_token }}
+            {{ form.hidden_tag() }}
 
-                    {{form.titulo.label(class="text-orange-500 font-medium mt-5")}}
-                    {{form.titulo(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+            <div class="mb-3">
+                {{ form.user_id.label(class="form-label text-warning fw-medium") }}
+                {{ form.user_id(class="form-control bg-secondary text-light border-0") }}
+            </div>
 
-                    {{form.autor.label(class="text-orange-500 font-medium mt-5")}}
-                    {{form.autor(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+            <div class="mb-3">
+                {{ form.livro_id.label(class="form-label text-warning fw-medium") }}
+                {{ form.livro_id(class="form-control bg-secondary text-light border-0") }}
+            </div>
 
-                    {{form.editora.label(class="text-orange-500 font-medium mt-5")}}
-                    {{form.editora(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
-                    
-                    {{form.anoPublicacao.label(class="text-orange-500 font-medium mt-5")}}
-                    {{form.anoPublicacao(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+            <div class="mb-3">
+                {{ form.data_emprestimo.label(class="form-label text-warning fw-medium") }}
+                {{ form.data_emprestimo(class="form-control bg-secondary text-light border-0") }}
+            </div>
 
-                    {{form.genero.label(class="text-orange-500 font-medium mt-5")}}
-                    {{form.genero(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+            <div class="mb-3">
+                {{ form.data_devolucao.label(class="form-label text-warning fw-medium") }}
+                {{ form.data_devolucao(class="form-control bg-secondary text-light border-0") }}
+            </div>
 
-                    {{form.quantidade_disponivel.label(class="text-orange-500 font-medium mt-5")}}
-                    {{form.quantidade_disponivel(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
-                    
-                    {% for field, errors in form.errors.items() %}
-                    {% for error in errors %}
-                            <div class="text-red-500 mt-2">{{ error }}</div>
-                        {% endfor %}
-                    {% endfor %}
+            {% for field, errors in form.errors.items() %}
+                {% for error in errors %}
+                    <div class="text-danger mb-2">{{ error }}</div>
+                {% endfor %}
+            {% endfor %}
 
-                    {{form.btnSubmit(class="bg-orange-500 w-100 text-stone-50 font-semibold text-lg mt-7 rounded py-1 hover:bg-orange-700 cursor-pointer transition-all duration-500")}}
-                
-                </form>
+            {{ form.btnSubmit(class="btn btn-warning w-100 fw-semibold mt-4") }}
+
+        </form>
     </section>
-
 </div>
-
 {% endblock %}

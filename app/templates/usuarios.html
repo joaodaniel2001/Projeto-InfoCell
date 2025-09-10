@@ -4,48 +4,66 @@
 
 {% block content %}
 
-<div class="container-usuarios flex flex-col justify-center align-center">
-    <div class="titulo mt-[4rem] flex-col justify-center items-center">
-        <h2 class="text-3xl text-center text-orange-500 font-bold">LISTA DE USÁRIOS</h2>
+<div class="container-usuarios flex flex-col justify-center items-center bg-gray-900 min-h-screen py-16">
+
+    <div class="titulo mt-16 flex flex-col justify-center items-center">
+        <h2 class="text-3xl text-center text-orange-400 font-bold">LISTA DE USÁRIOS</h2>
     </div>
 
-    <div class="pesquisa mt-[3rem] flex justify-center">
-        <form action="" method="get" class="flex flex-row gap-4 w-[800px]">
-                <div class="w-full">
-                    <input type="text" name="pesquisa" class="w-full border-[1px] rounded border-stone-400 px-1 py-1 outline-orange-500 outline-2" placeholder="Pesquisar Usuário">
-                </div>
-                <div class="w-70">
-                    <button type="submit" class="bg-orange-500 w-full text-stone-50 font-semibold text-lg rounded py-1 px-4 hover:bg-orange-700 cursor-pointer transition-all duration-500">Pesquisar</button>
-                </div>
-            </form>
+    <div class="pesquisa mt-12 flex justify-center w-full">
+        <form action="" method="get" class="flex flex-row gap-4 max-w-4xl w-full px-4">
+            <div class="w-full">
+                <input 
+                    type="text" 
+                    name="pesquisa" 
+                    placeholder="Pesquisar Usuário"
+                    class="w-full rounded border border-orange-500 bg-gray-800 text-orange-300 placeholder-orange-600 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500" />
+            </div>
+            <div class="w-40">
+                <button 
+                    type="submit" 
+                    class="bg-orange-500 w-full text-gray-100 font-semibold text-lg rounded py-2 px-4 hover:bg-orange-600 cursor-pointer transition-all duration-300">
+                    Pesquisar
+                </button>
+            </div>
+        </form>
     </div>
 
-    <section class="usuarios flex justify-center mt-[3rem]">
-        <div class="lista-usuarios grid grid-cols-4 gap-[2rem] w-[1500px]">
+    <section class="usuarios flex justify-center mt-12 w-full px-4">
+        <div class="lista-usuarios grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl w-full">
+
             {% for user in usuarios.dados %}
-                <div class="card-usuario border-orange-500 border-[1px] rounded p-5">
-                    <div class="nome-svg flex flex-row gap-4 items-center justify-start">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.705 0.213 47.604)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex align-self-center lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
-                        <h2 class="text-xl font-semibold text-orange-500">{{user.nome}}</h2>
+                <div class="card-usuario border border-orange-500 rounded p-6 bg-gray-800 text-orange-300 shadow-lg hover:shadow-orange-600 transition-shadow duration-300">
+                    <div class="nome-svg flex items-center gap-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-400">
+                            <circle cx="12" cy="12" r="10" />
+                            <circle cx="12" cy="10" r="3" />
+                            <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" />
+                        </svg>
+                        <h2 class="text-xl font-semibold text-orange-400">{{user.nome}}</h2>
                     </div>
-                    <p class="mt-3 text-orange-500 font-semibold">Email: <span class="text-zinc-950 font-normal">{{user.email}}</span></p>
-                    <p class="mt-3 mb-3 text-orange-500 font-semibold">Telefone: <span class="text-zinc-950 font-normal">{{user.telefone}}</span></p>
+                    <p class="mt-4 font-semibold">Email: <span class="text-gray-300 font-normal">{{user.email}}</span></p>
+                    <p class="mt-2 mb-4 font-semibold">Telefone: <span class="text-gray-300 font-normal">{{user.telefone}}</span></p>
+                    
                     {% if current_user.email == 'admin@gmail.com' %}
                     <form action="{{ url_for('delete_usuario', id=user.id) }}" method="POST" style="display:inline;">
-                            <button type="submit" class="border border-orange-500 p-1 rounded bg-orange-500"
-                                    onclick="return confirm('Tem certeza que deseja excluir este usuario?');">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash"><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                            </button>
-                        </form>
+                        <button 
+                            type="submit" 
+                            class="flex items-center justify-center border border-orange-500 bg-orange-600 hover:bg-orange-700 rounded p-2 text-white transition-colors duration-300"
+                            onclick="return confirm('Tem certeza que deseja excluir este usuario?');">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-trash-icon">
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                                <path d="M3 6h18"/>
+                                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                            </svg>
+                        </button>
+                    </form>
                     {% endif %}
                 </div>
-               
-                                    
             {% endfor %}
+
         </div>
-
     </section>
-
 
 </div>
 

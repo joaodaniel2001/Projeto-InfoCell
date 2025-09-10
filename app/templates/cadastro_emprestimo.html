@@ -3,36 +3,42 @@
 {% include "header.html" %}
 
 {% block content %}
-<div class="container-login w-100 flex justify-center align-center">
-    <section class="forms-login mt-[5rem] border-orange-500 border-[1px] p-10 rounded w-[500px]">
-                <h3 class="text-center text-3xl font-bold mt-4 text-orange-500">Cadastrar Empréstimo</h3>
-                <form action="" method="post" class="flex flex-col">
-                    {{form.csrf_token}}
-                    {{ form.hidden_tag()}}
+<div class="container mt-5 bg-dark text-light rounded p-4" style="min-height: 80vh;">
+    <section>
+        <h3 class="mb-4 text-warning">Cadastrar Empréstimo</h3>
+        <form action="" method="post" class="needs-validation" novalidate>
+            {{ form.csrf_token }}
+            {{ form.hidden_tag() }}
 
-                    {{form.user_id.label(class="text-orange-500 font-medium mt-5")}}
-                    {{form.user_id(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+            <div class="mb-3">
+                {{ form.user_id.label(class="form-label text-light") }}
+                {{ form.user_id(class="form-control bg-secondary text-light border-0") }}
+            </div>
 
-                    {{form.livro_id.label(class="text-orange-500 font-medium mt-5")}}
-                    {{form.livro_id(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
+            <div class="mb-3">
+                {{ form.livro_id.label(class="form-label text-warning fw-medium") }}
+                {{ form.livro_id(class="form-control bg-secondary text-light border-0") }}
+            </div>
 
-                    {{form.data_emprestimo.label(class="text-orange-500 font-medium mt-5")}}
-                    {{form.data_emprestimo(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
-                    
-                    {{form.data_devolucao.label(class="text-orange-500 font-medium mt-5")}}
-                    {{form.data_devolucao(class="border-[1px] rounded border-stone-400 mt-2 px-1 py-2 outline-orange-500 outline-2")}}
-                    
-                    {% for field, errors in form.errors.items() %}
-                    {% for error in errors %}
-                            <div class="text-red-500 mt-2">{{ error }}</div>
-                        {% endfor %}
-                    {% endfor %}
+            <div class="mb-3">
+                {{ form.data_emprestimo.label(class="form-label text-warning fw-medium") }}
+                {{ form.data_emprestimo(class="form-control bg-secondary text-light border-0") }}
+            </div>
 
-                    {{form.btnSubmit(class="bg-orange-500 w-100 text-stone-50 font-semibold text-lg mt-7 rounded py-1 hover:bg-orange-700 cursor-pointer transition-all duration-500")}}
-                
-                </form>
+            <div class="mb-3">
+                {{ form.data_devolucao.label(class="form-label text-warning fw-medium") }}
+                {{ form.data_devolucao(class="form-control bg-secondary text-light border-0") }}
+            </div>
+
+            {% for field, errors in form.errors.items() %}
+                {% for error in errors %}
+                    <div class="alert alert-danger py-1" role="alert">{{ error }}</div>
+                {% endfor %}
+            {% endfor %}
+
+            {{ form.btnSubmit(class="btn btn-warning") }}
+
+        </form>
     </section>
-
 </div>
-
 {% endblock %}

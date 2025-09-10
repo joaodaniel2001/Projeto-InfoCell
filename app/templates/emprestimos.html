@@ -3,118 +3,99 @@
 {% include "header.html" %}
 
 {% block content %}
+<div class="container my-5 bg-dark text-light rounded p-4" style="min-height: 100vh;">
 
-<div class="container-livros flex flex-col justify-center align-center">
-    <div class="titulo mt-[4rem] flex-col justify-center items-center">
-        <h2 class="text-3xl text-center text-orange-500 font-bold">Emprestimos Ativos</h2>
+    <div class="text-center mb-4">
+        <h2 class="text-warning fw-bold">Empréstimos Ativos</h2>
     </div>
 
     {% if current_user.email == 'admin@gmail.com' %}
-    <div class="container-livros flex justify-center">
-        <div class="gerenciar flex flex-col justify-center mt-[3rem] w-[800px]">
-            <h2 class="text-center text-2xl text-orange-500 font-semibold">Gerenciar</h2>
-            <div class="botoes grid grid-cols-1 gap-10 w-[150px]">
-                <a href="{{url_for('emprestimo_cadastro')}}"
-                    class="bg-orange-500 text-stone-50 font-semibold text-lg mt-7 rounded py-1 px-3 flex flex-row justify-between items-center hover:bg-orange-700 cursor-pointer transition-all duration-500">Cadastrar
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-circle-plus-icon lucide-circle-plus">
+    <div class="d-flex justify-content-center mb-4">
+        <div style="max-width: 800px; width: 100%;">
+            <h2 class="text-warning fw-semibold text-center mb-3">Gerenciar</h2>
+            <div class="d-grid gap-2" style="max-width: 150px; margin: 0 auto;">
+                <a href="{{ url_for('emprestimo_cadastro') }}" class="btn btn-warning d-flex justify-content-between align-items-center">
+                    Cadastrar
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-2">
                         <circle cx="12" cy="12" r="10" />
                         <path d="M8 12h8" />
                         <path d="M12 8v8" />
-                    </svg></a>
+                    </svg>
+                </a>
             </div>
         </div>
     </div>
     {% endif %}
 
-    <div class="pesquisa mt-[3rem] flex justify-center">
-        <form action="" method="get" class="flex flex-row gap-4 w-[800px]">
-            <div class="w-full">
-                <input type="text" name="pesquisa"
-                    class="w-full border-[1px] rounded border-stone-400 px-1 py-1 outline-orange-500 outline-2"
-                    placeholder="Pesquisar Empréstimo por Livro">
-            </div>
-            <div class="w-70">
-                <button type="submit"
-                    class="bg-orange-500 w-full text-stone-50 font-semibold text-lg rounded py-1 px-4 hover:bg-orange-700 cursor-pointer transition-all duration-500">Pesquisar</button>
-            </div>
+    <div class="d-flex justify-content-center mb-4">
+        <form action="" method="get" class="d-flex gap-3" style="max-width: 800px; width: 100%;">
+            <input type="text" name="pesquisa" class="form-control bg-secondary text-light border-0" placeholder="Pesquisar Empréstimo por Livro">
+            <button type="submit" class="btn btn-warning fw-semibold px-4">Pesquisar</button>
         </form>
     </div>
 
-    <section class="emprestimos flex justify-center mt-[3rem]">
-        <div class="lista-emprestimos grid grid-cols-4 gap-[2rem] mb-[2rem] w-[1500px]">
+    <section class="d-flex justify-content-center">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" style="max-width: 1500px; width: 100%;">
             {% for emp in emprestimos.dados %}
+                {% if current_user.id == emp.user.id or current_user.email == 'admin@gmail.com' %}
+                <div class="col">
+                    <div class="card border border-warning h-100 bg-secondary text-light">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3 gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
+                                    <rect width="8" height="18" x="3" y="3" rx="1" />
+                                    <path d="M7 3v18" />
+                                    <path d="M20.4 18.9c.2.5-.1 1.1-.6 1.3l-1.9.7c-.5.2-1.1-.1-1.3-.6L11.1 5.1c-.2-.5.1-1.1.6-1.3l1.9-.7c.5-.2 1.1.1 1.3.6Z" />
+                                </svg>
+                                <h5 class="card-title text-warning mb-0">Empréstimo {{ emp.id }}</h5>
+                            </div>
+                            <p class="mb-2"><strong class="text-warning">Aluno:</strong> <span>{{ emp.user.nome }} [{{ emp.user.id }}]</span></p>
+                            <p class="mb-2"><strong class="text-warning">Livro:</strong> 
+                                {% if emp.livro %}
+                                    <span>{{ emp.livro.titulo }} [{{ emp.livro.id }}]</span>
+                                {% else %}
+                                    <span class="text-danger">Livro Excluído do Sistema</span>
+                                {% endif %}
+                            </p>
+                            <p class="mb-2"><strong class="text-warning">Data do Empréstimo:</strong> <span>{{ emp.data_emprestimo.strftime('%d/%m/%Y') }}</span></p>
+                            <p class="mb-2"><strong class="text-warning">Data de Devolução:</strong> <span>{{ emp.data_devolucao.strftime('%d/%m/%Y') }}</span></p>
+                            <p class="mb-3"><strong class="text-warning">Status do Empréstimo:</strong> 
+                                {% if emp.statusEmprestimo == 'Devolução Atrasada' %}
+                                    <span class="text-danger fw-normal animate-pulse">{{ emp.statusEmprestimo }}</span>
+                                {% elif emp.statusEmprestimo == 'Entrega Hoje' %}
+                                    <span class="text-warning fw-normal animate-pulse">{{ emp.statusEmprestimo }}</span>
+                                {% else %}
+                                    <span class="text-success fw-normal">{{ emp.statusEmprestimo }}</span>
+                                {% endif %}
+                            </p>
 
-            {% if current_user.id == emp.user.id or current_user.email == 'admin@gmail.com' %}
-            <div class="card-emprestimo border-orange-500 border-[1px] rounded p-5">
-                <div class="nome-svg flex flex-row gap-4 items-center justify-start">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="oklch(0.705 0.213 47.604)" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="lucide lucide-library-big-icon lucide-library-big">
-                        <rect width="8" height="18" x="3" y="3" rx="1" />
-                        <path d="M7 3v18" />
-                        <path
-                            d="M20.4 18.9c.2.5-.1 1.1-.6 1.3l-1.9.7c-.5.2-1.1-.1-1.3-.6L11.1 5.1c-.2-.5.1-1.1.6-1.3l1.9-.7c.5-.2 1.1.1 1.3.6Z" />
-                    </svg>
-                    <h2 class="text-xl font-semibold text-orange-500">Empréstimo {{emp.id}}</h2>
-                </div>
-                <p class="mt-3 text-orange-500 font-semibold">Aluno: <span
-                        class="text-zinc-950 font-normal">{{emp.user.nome}} [{{emp.user.id}}]</span></p>
-                <p class="mt-3 text-orange-500 font-semibold">Livro: {% if emp.livro %}<span
-                        class="text-zinc-950 font-normal">{{emp.livro.titulo}} [{{emp.livro.id}}] </span> {% else %}
-                    <span class="text-red-600 font-normal"> Livro Excluído do Sistema</span> {% endif %}</p>
-                <p class="mt-3 text-orange-500 font-semibold">Data do Empréstimo: <span
-                        class="text-zinc-950 font-normal">{{emp.data_emprestimo.strftime('%d/%m/%Y')}}</span></p>
-                <p class="mt-3 text-orange-500 font-semibold">Data de Devolucao: <span
-                        class="text-zinc-950 font-normal">{{emp.data_devolucao.strftime('%d/%m/%Y')}}</span< /p>
-                        <p class="mt-3 mb-3 text-orange-500 font-semibold">Status do Empréstimo: {% if
-                            emp.statusEmprestimo == 'Devolução Atrasada' %} <span
-                                class="text-red-800 font-normal animate-pulse">{{emp.statusEmprestimo}}</span> {% elif
-                            emp.statusEmprestimo == 'Entrega Hoje' %} <span
-                                class="text-amber-500 font-normal animate-pulse">{{emp.statusEmprestimo}}</span> {% else
-                            %} <span class="text-green-600 font-normal">{{emp.statusEmprestimo}}</span> {% endif %}</p>
+                            {% if current_user.email == 'admin@gmail.com' %}
+                            <div class="d-flex gap-2">
+                                <form action="{{ url_for('delete_emprestimo', id=emp.id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este empréstimo?');">
+                                    <button type="submit" class="btn btn-warning p-1 d-flex align-items-center justify-content-center" title="Excluir Empréstimo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                            <path d="M3 6h18" />
+                                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                        </svg>
+                                    </button>
+                                </form>
 
-                        {% if current_user.email == 'admin@gmail.com' %}
-                        <div class="botoes flex flex-row gap-4">
-
-                            <form action="{{ url_for('delete_emprestimo', id=emp.id) }}" method="POST"
-                                style="display:inline;">
-                                <button type="submit" class="border border-orange-500 p-1 rounded bg-orange-500"
-                                    onclick="return confirm('Tem certeza que deseja excluir este emprestimo?');">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash">
-                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-                                        <path d="M3 6h18" />
-                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                <a href="{{ url_for('editar_emprestimo', id=emp.id) }}" class="btn btn-warning p-1 d-flex align-items-center justify-content-center" title="Editar Empréstimo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                        <path d="m15 5 4 4" />
                                     </svg>
-                                </button>
-                            </form>
-
-                            <a href="{{url_for('editar_emprestimo', id=emp.id)}}"
-                                class="border border-orange-500 p-1 rounded bg-orange-500"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil">
-                                    <path
-                                        d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
-                                    <path d="m15 5 4 4" />
-                                </svg></a>
-
+                                </a>
+                            </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
-            </div>
-            {% endif %}
-
-
+                    </div>
+                </div>
+                {% endif %}
             {% endfor %}
         </div>
-
     </section>
 
-
-
 </div>
-
 {% endblock %}
