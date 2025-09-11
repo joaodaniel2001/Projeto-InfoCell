@@ -3,31 +3,31 @@
 {% include "header.html" %}
 
 {% block content %}
-<div class="container mt-5 bg-dark text-light rounded p-4" style="min-height: 80vh;">
+<div class="container mt-5 rounded p-4 border-2 shadow-lg" style="min-height: 80vh;">
     <section>
-        <h3 class="mb-4 text-warning">Cadastrar Empréstimo</h3>
+        <h3 class="mb-4 text-dark">Cadastrar Empréstimo</h3>
         <form action="" method="post" class="needs-validation" novalidate>
             {{ form.csrf_token }}
             {{ form.hidden_tag() }}
 
             <div class="mb-3">
-                {{ form.user_id.label(class="form-label text-light") }}
-                {{ form.user_id(class="form-control bg-secondary text-light border-0") }}
+                {{ form.user_id.label(class="form-label text-dark fw-medium") }}
+                {{ form.user_id(class="form-control") }}
             </div>
 
             <div class="mb-3">
-                {{ form.livro_id.label(class="form-label text-warning fw-medium") }}
-                {{ form.livro_id(class="form-control bg-secondary text-light border-0") }}
+                {{ form.livro_id.label(class="form-label text-dark fw-medium") }}
+                {{ form.livro_id(class="form-control") }}
             </div>
 
             <div class="mb-3">
-                {{ form.data_emprestimo.label(class="form-label text-warning fw-medium") }}
-                {{ form.data_emprestimo(class="form-control bg-secondary text-light border-0") }}
+                {{ form.data_emprestimo.label(class="form-label text-dark fw-medium") }}
+                {{ form.data_emprestimo(class="form-control") }}
             </div>
 
             <div class="mb-3">
-                {{ form.data_devolucao.label(class="form-label text-warning fw-medium") }}
-                {{ form.data_devolucao(class="form-control bg-secondary text-light border-0") }}
+                {{ form.data_devolucao.label(class="form-label text-dark fw-medium") }}
+                {{ form.data_devolucao(class="form-control") }}
             </div>
 
             {% for field, errors in form.errors.items() %}
@@ -36,7 +36,7 @@
                 {% endfor %}
             {% endfor %}
 
-            {{ form.btnSubmit(class="btn btn-warning") }}
+            {{ form.btnSubmit(class="btn btn-dark") }}
 
         </form>
     </section>

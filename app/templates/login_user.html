@@ -3,29 +3,29 @@
 {% include "header.html" %}
 
 {% block content %}
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh; background-color: #121212;">
-    <section class="border border-warning rounded p-5" style="max-width: 500px; width: 100%; background-color: #1e1e1e;">
-        <h3 class="text-center text-warning fw-bold mb-4 display-5">Fazer Login</h3>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh; background-color: #fff;">
+    <section class="border border-dark rounded p-5 shadow-lg" style="max-width: 500px; width: 100%; background-color: #fff;">
+        <h3 class="text-center fw-bold mb-4 display-5">Login</h3>
         <form action="" method="post" class="d-flex flex-column">
             {{ form.csrf_token }}
             {{ form.hidden_tag() }}
 
-            <label for="{{ form.email.id }}" class="form-label text-warning fw-medium mt-3">{{ form.email.label.text }}</label>
-            {{ form.email(class="form-control border-warning bg-dark text-warning") }}
+            <label for="{{ form.email.id }}" class="form-label fw-medium mt-3">{{ form.email.label.text }}</label>
+            {{ form.email(class="form-control border-dark") }}
 
-            <label for="{{ form.senha.id }}" class="form-label text-warning fw-medium mt-3">{{ form.senha.label.text }}</label>
-            {{ form.senha(class="form-control border-warning bg-dark text-warning") }}
+            <label for="{{ form.senha.id }}" class="form-label fw-medium mt-3">{{ form.senha.label.text }}</label>
+            {{ form.senha(class="form-control border-dark") }}
 
             {% if erro %}
-                <div class="text-danger text-center mt-3 mb-3">{{ erro }}</div>
+                <div class="text-center mt-3 mb-3">{{ erro }}</div>
             {% endif %}
 
-            {{ form.submit(class="btn btn-warning mt-4 fw-semibold") }}
+            {{ form.submit(class="btn btn-outline-dark mt-4 fw-semibold") }}
         </form>
 
-        <p class="mt-4 text-center text-warning">
+        <p class="mt-4 text-center">
             Não possui uma conta? 
-            <a href="{{ url_for('registeruser') }}" class="text-warning fw-semibold text-decoration-none" style="text-decoration: underline;">
+            <a href="{{ url_for('registeruser') }}" class=" fw-semibold text-decoration-none" style="text-decoration: underline;">
                 Registre-se
             </a>
         </p>

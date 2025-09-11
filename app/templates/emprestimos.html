@@ -3,24 +3,20 @@
 {% include "header.html" %}
 
 {% block content %}
-<div class="container my-5 bg-dark text-light rounded p-4" style="min-height: 100vh;">
+<div class="container my-5 text-light rounded p-4" style="min-height: 100vh;">
 
     <div class="text-center mb-4">
-        <h2 class="text-warning fw-bold">Empréstimos Ativos</h2>
+        <h2 class="text-dark fw-bold">Empréstimos Ativos</h2>
     </div>
 
-    {% if current_user.email == 'admin@gmail.com' %}
+    {% if current_user.email == 'joaodaniel1al@gmail.com' %}
     <div class="d-flex justify-content-center mb-4">
         <div style="max-width: 800px; width: 100%;">
-            <h2 class="text-warning fw-semibold text-center mb-3">Gerenciar</h2>
+            <h2 class="text-dark fw-semibold text-center mb-3">Gerenciar</h2>
             <div class="d-grid gap-2" style="max-width: 150px; margin: 0 auto;">
-                <a href="{{ url_for('emprestimo_cadastro') }}" class="btn btn-warning d-flex justify-content-between align-items-center">
+                <a href="{{ url_for('emprestimo_cadastro') }}"
+                    class="btn btn-outline-dark">
                     Cadastrar
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-2">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M8 12h8" />
-                        <path d="M12 8v8" />
-                    </svg>
                 </a>
             </div>
         </div>
@@ -29,70 +25,83 @@
 
     <div class="d-flex justify-content-center mb-4">
         <form action="" method="get" class="d-flex gap-3" style="max-width: 800px; width: 100%;">
-            <input type="text" name="pesquisa" class="form-control bg-secondary text-light border-0" placeholder="Pesquisar Empréstimo por Livro">
-            <button type="submit" class="btn btn-warning fw-semibold px-4">Pesquisar</button>
+            <input type="text" name="pesquisa" class="form-control" placeholder="Pesquisar Empréstimo por Livro">
+            <button type="submit" class="btn btn-primary fw-semibold px-4">Pesquisar</button>
         </form>
     </div>
 
     <section class="d-flex justify-content-center">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" style="max-width: 1500px; width: 100%;">
             {% for emp in emprestimos.dados %}
-                {% if current_user.id == emp.user.id or current_user.email == 'admin@gmail.com' %}
-                <div class="col">
-                    <div class="card border border-warning h-100 bg-secondary text-light">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-3 gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
-                                    <rect width="8" height="18" x="3" y="3" rx="1" />
-                                    <path d="M7 3v18" />
-                                    <path d="M20.4 18.9c.2.5-.1 1.1-.6 1.3l-1.9.7c-.5.2-1.1-.1-1.3-.6L11.1 5.1c-.2-.5.1-1.1.6-1.3l1.9-.7c.5-.2 1.1.1 1.3.6Z" />
-                                </svg>
-                                <h5 class="card-title text-warning mb-0">Empréstimo {{ emp.id }}</h5>
-                            </div>
-                            <p class="mb-2"><strong class="text-warning">Aluno:</strong> <span>{{ emp.user.nome }} [{{ emp.user.id }}]</span></p>
-                            <p class="mb-2"><strong class="text-warning">Livro:</strong> 
-                                {% if emp.livro %}
-                                    <span>{{ emp.livro.titulo }} [{{ emp.livro.id }}]</span>
-                                {% else %}
-                                    <span class="text-danger">Livro Excluído do Sistema</span>
-                                {% endif %}
-                            </p>
-                            <p class="mb-2"><strong class="text-warning">Data do Empréstimo:</strong> <span>{{ emp.data_emprestimo.strftime('%d/%m/%Y') }}</span></p>
-                            <p class="mb-2"><strong class="text-warning">Data de Devolução:</strong> <span>{{ emp.data_devolucao.strftime('%d/%m/%Y') }}</span></p>
-                            <p class="mb-3"><strong class="text-warning">Status do Empréstimo:</strong> 
-                                {% if emp.statusEmprestimo == 'Devolução Atrasada' %}
-                                    <span class="text-danger fw-normal animate-pulse">{{ emp.statusEmprestimo }}</span>
-                                {% elif emp.statusEmprestimo == 'Entrega Hoje' %}
-                                    <span class="text-warning fw-normal animate-pulse">{{ emp.statusEmprestimo }}</span>
-                                {% else %}
-                                    <span class="text-success fw-normal">{{ emp.statusEmprestimo }}</span>
-                                {% endif %}
-                            </p>
-
-                            {% if current_user.email == 'admin@gmail.com' %}
-                            <div class="d-flex gap-2">
-                                <form action="{{ url_for('delete_emprestimo', id=emp.id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este empréstimo?');">
-                                    <button type="submit" class="btn btn-warning p-1 d-flex align-items-center justify-content-center" title="Excluir Empréstimo">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-                                            <path d="M3 6h18" />
-                                            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                                        </svg>
-                                    </button>
-                                </form>
-
-                                <a href="{{ url_for('editar_emprestimo', id=emp.id) }}" class="btn btn-warning p-1 d-flex align-items-center justify-content-center" title="Editar Empréstimo">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
-                                        <path d="m15 5 4 4" />
-                                    </svg>
-                                </a>
-                            </div>
-                            {% endif %}
+            {% if current_user.id == emp.user.id or current_user.email == 'joaodaniel1al@gmail.com' %}
+            <div class="col">
+                <div class="card border border-warning h-100 bg-secondary text-light">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3 gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="orange"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="8" height="18" x="3" y="3" rx="1" />
+                                <path d="M7 3v18" />
+                                <path
+                                    d="M20.4 18.9c.2.5-.1 1.1-.6 1.3l-1.9.7c-.5.2-1.1-.1-1.3-.6L11.1 5.1c-.2-.5.1-1.1.6-1.3l1.9-.7c.5-.2 1.1.1 1.3.6Z" />
+                            </svg>
+                            <h5 class="card-title text-warning mb-0">Empréstimo {{ emp.id }}</h5>
                         </div>
+                        <p class="mb-2"><strong class="text-warning">Aluno:</strong> <span>{{ emp.user.nome }} [{{
+                                emp.user.id }}]</span></p>
+                        <p class="mb-2"><strong class="text-warning">Livro:</strong>
+                            {% if emp.livro %}
+                            <span>{{ emp.livro.titulo }} [{{ emp.livro.id }}]</span>
+                            {% else %}
+                            <span class="text-danger">Livro Excluído do Sistema</span>
+                            {% endif %}
+                        </p>
+                        <p class="mb-2"><strong class="text-white">Data do Empréstimo:</strong> <span>{{
+                                emp.data_emprestimo.strftime('%d/%m/%Y') }}</span></p>
+                        <p class="mb-2"><strong class="text-white">Data de Devolução:</strong> <span>{{
+                                emp.data_devolucao.strftime('%d/%m/%Y') }}</span></p>
+                        <p class="mb-3"><strong class="text-white">Status do Empréstimo:</strong>
+                            {% if emp.statusEmprestimo == 'Devolução Atrasada' %}
+                            <span class="text-danger fw-normal animate-pulse">{{ emp.statusEmprestimo }}</span>
+                            {% elif emp.statusEmprestimo == 'Entrega Hoje' %}
+                            <span class="text-warning fw-normal animate-pulse">{{ emp.statusEmprestimo }}</span>
+                            {% else %}
+                            <span class="text-success fw-normal">{{ emp.statusEmprestimo }}</span>
+                            {% endif %}
+                        </p>
+
+                        {% if current_user.email == 'joaodaniel1al@gmail.com' %}
+                        <div class="d-flex gap-2">
+                            <form action="{{ url_for('delete_emprestimo', id=emp.id) }}" method="POST"
+                                onsubmit="return confirm('Tem certeza que deseja excluir este empréstimo?');">
+                                <button type="submit"
+                                    class="btn btn-warning p-1 d-flex align-items-center justify-content-center"
+                                    title="Excluir Empréstimo">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                                        <path d="M3 6h18" />
+                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                    </svg>
+                                </button>
+                            </form>
+
+                            <a href="{{ url_for('editar_emprestimo', id=emp.id) }}"
+                                class="btn btn-warning p-1 d-flex align-items-center justify-content-center"
+                                title="Editar Empréstimo">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                    <path d="m15 5 4 4" />
+                                </svg>
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
-                {% endif %}
+            </div>
+            {% endif %}
             {% endfor %}
         </div>
     </section>

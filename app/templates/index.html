@@ -1,57 +1,55 @@
-<div class="container py-5 bg-dark text-light" style="min-height: 100vh;">
+{% extends "head.html" %}
 
-    <div class="text-center mt-4">
-        <h1 class="fw-bold mb-2 text-warning">BEM-VINDO A BIBLIOTECA FLASK</h1>
-        <p class="text-secondary">O melhor sistema de gerenciamento de biblioteca para você!</p>
+{% include "header.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">BIBLIOTECA DO ZICK</h1>
     </div>
 
-    <div class="row justify-content-center g-4 mt-5">
+    <div class="row justify-content-center g-4">
 
         {% set card_classes = "border border-warning rounded shadow-lg h-100 bg-secondary text-light" %}
         {% set btn_classes = "btn btn-warning text-dark mt-3 w-100 fw-semibold" %}
 
+        <!-- Empréstimos -->
         <div class="col-12 col-md-6 col-lg-4">
-            <div class="{{ card_classes }}">
-                <img src="{{ url_for('static', filename='img/biblioteca.png') }}"
-                    class="card-img-top rounded-top shadow-sm" alt="Imagem biblioteca"
-                    style="height: 180px; object-fit: cover;">
-                <div class="card-body text-center">
-                    <h5 class="card-title fw-bold">
-                        {% if current_user.email == 'admin@gmail.com' %} Gerenciar Livros {% else %} Livros {% endif %}
-                    </h5>
-                    <a href="{{ url_for('livros') }}" class="{{ btn_classes }}">Clique aqui!</a>
-                </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    {% if current_user.email == 'joaodaniel1al@gmail.com' %} Gerenciar Empréstimos {% else %}
+                    Empréstimos {%
+                    endif %}
+                </h5>
+                <a href="{{ url_for('emprestimos') }}" class="btn btn-outline-dark col-12">Saiba mais</a>
             </div>
         </div>
 
-        {% if current_user.email == 'admin@gmail.com' %}
+        <!-- Usuários (apenas admin) -->
+        {% if current_user.email == 'joaodaniel1al@gmail.com' %}
         <div class="col-12 col-md-6 col-lg-4">
-            <div class="{{ card_classes }}">
-                <img src="{{ url_for('static', filename='img/users.jpg') }}" class="card-img-top rounded-top shadow-sm"
-                    alt="Imagem usuários" style="height: 180px; object-fit: cover;">
-                <div class="card-body text-center">
-                    <h5 class="card-title fw-bold">Gerenciar Usuários</h5>
-                    <a href="{{ url_for('usuarios') }}" class="{{ btn_classes }}">Clique aqui!</a>
-                </div>
+            <div class="card-body">
+                <h5 class="card-title fw-bold">Gerenciar Usuários</h5>
+                <a href="{{ url_for('usuarios') }}" class="btn btn-outline-dark col-12">Saiba mais</a>
             </div>
         </div>
         {% endif %}
 
+        <!-- Livros -->
         <div class="col-12 col-md-6 col-lg-4">
-            <div class="{{ card_classes }}">
-                <img src="{{ url_for('static', filename='img/emprestimos.png') }}"
-                    class="card-img-top rounded-top shadow-sm" alt="Imagem empréstimos"
-                    style="height: 180px; object-fit: cover;">
-                <div class="card-body text-center">
-                    <h5 class="card-title fw-bold">
-                        {% if current_user.email == 'admin@gmail.com' %} Gerenciar Empréstimos {% else %} Empréstimos {%
-                        endif %}
-                    </h5>
-                    <a href="{{ url_for('emprestimos') }}" class="{{ btn_classes }}">Clique aqui!</a>
-                </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    {% if current_user.email == 'joaodaniel1al@gmail.com' %} Gerenciar Livros {% else %} Livros {% endif
+                    %}
+                </h5>
+                <a href="{{ url_for('livros') }}" class="btn btn-outline-dark col-12">Saiba mais</a>
             </div>
         </div>
 
     </div>
 
 </div>
+
+{% endblock %}

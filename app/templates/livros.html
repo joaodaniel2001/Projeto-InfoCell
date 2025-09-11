@@ -4,26 +4,19 @@
 
 {% block content %}
 
-<div class="container my-5 d-flex flex-column align-items-center" style="background-color: #121212; color: #f0a500; min-height: 100vh;">
+<div class="container my-5 d-flex flex-column align-items-center">
 
     <div class="mb-4 text-center">
-        <h2 class="fw-bold display-5" style="color: #f0a500;">LIVROS</h2>
+        <h2 class="fw-bold display-5">Livros disponíveis</h2>
     </div>
 
-    {% if current_user.email == 'admin@gmail.com' %}
+    {% if current_user.email == 'joaodaniel1al@gmail.com' %}
     <div class="mb-4 d-flex justify-content-center w-100">
         <div class="text-center" style="max-width: 800px;">
-            <h3 class="fw-semibold mb-3" style="color: #f0a500;">Gerenciar</h3>
+            <h3 class="fw-semibold mb-3">Gerenciar</h3>
             <a href="{{ url_for('livro_cadastro') }}"
-                class="btn btn-warning d-inline-flex align-items-center gap-2 px-4 py-2" style="background-color: #f0a500; border-color: #f0a500;">
+                class="btn btn-outline-dark d-inline-flex align-items-centerpx-4 py-2">
                 Cadastrar
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="white"
-                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="bi bi-plus-circle"
-                    viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M8 12h8" />
-                    <path d="M12 8v8" />
-                </svg>
             </a>
         </div>
     </div>
@@ -31,8 +24,8 @@
 
     <div class="mb-4 d-flex justify-content-center w-100">
         <form action="" method="get" class="d-flex gap-3" style="max-width: 800px; width: 100%;">
-            <input type="text" name="pesquisa" class="form-control border-warning bg-dark text-warning" placeholder="Pesquisar Livro" />
-            <button type="submit" class="btn btn-warning px-4">Pesquisar</button>
+            <input type="text" name="pesquisa" class="form-control" placeholder="Pesquisar Livro" />
+            <button type="submit" class="btn btn-primary px-4">Pesquisar</button>
         </form>
     </div>
 
@@ -50,14 +43,19 @@
                             <path
                                 d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
                         </svg>
-                        <h5 class="card-title fw-semibold" style="color: #f0a500;">{{ livro.titulo }} [{{ livro.id }}]</h5>
+                        <h5 class="card-title fw-semibold" style="color: #fff;">{{ livro.titulo }} [{{ livro.id }}]</h5>
                     </div>
-                    <p class="mb-1 fw-semibold" style="color: #f0a500;">Autor: <span class="text-light fw-normal">{{ livro.autor }}</span></p>
-                    <p class="mb-1 fw-semibold" style="color: #f0a500;">Ano de Publicação: <span class="text-light fw-normal">{{ livro.anoPublicacao }}</span></p>
-                    <p class="mb-1 fw-semibold" style="color: #f0a500;">Editora: <span class="text-light fw-normal">{{ livro.editora }}</span></p>
-                    <p class="mb-1 fw-semibold" style="color: #f0a500;">Gênero: <span class="text-light fw-normal">{{ livro.genero }}</span></p>
-                    <p class="mb-1 fw-semibold" style="color: #f0a500;">Exemplares Disponíveis: <span class="text-light fw-normal">{{ livro.quantidade_disponivel }}</span></p>
-                    <p class="mb-3 fw-semibold" style="color: #f0a500;">
+                    <p class="mb-1 fw-semibold" style="color: #fff;">Autor: <span class="text-light fw-normal">{{
+                            livro.autor }}</span></p>
+                    <p class="mb-1 fw-semibold" style="color: #fff;">Ano de Publicação: <span
+                            class="text-light fw-normal">{{ livro.anoPublicacao }}</span></p>
+                    <p class="mb-1 fw-semibold" style="color: #fff;">Editora: <span class="text-light fw-normal">{{
+                            livro.editora }}</span></p>
+                    <p class="mb-1 fw-semibold" style="color: #fff;">Gênero: <span class="text-light fw-normal">{{
+                            livro.genero }}</span></p>
+                    <p class="mb-1 fw-semibold" style="color: #fff;">Exemplares Disponíveis: <span
+                            class="text-light fw-normal">{{ livro.quantidade_disponivel }}</span></p>
+                    <p class="mb-3 fw-semibold" style="color: #fff;">
                         Status:
                         {% if livro.status == 'Indisponível' %}
                         <span class="text-danger fw-normal">{{ livro.status }}</span>
@@ -66,7 +64,7 @@
                         {% endif %}
                     </p>
 
-                    {% if current_user.email == 'admin@gmail.com' %}
+                    {% if current_user.email == 'joaodaniel1al@gmail.com' %}
                     <div class="d-flex gap-2">
                         <form action="{{ url_for('delete_livro', id=livro.id) }}" method="POST"
                             onsubmit="return confirm('Tem certeza que deseja excluir este livro?');"
@@ -88,7 +86,8 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="white"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="bi bi-pencil"
                                 viewBox="0 0 24 24">
-                                <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0-.055.119z" />
+                                <path
+                                    d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0-.055.119z" />
                             </svg>
                         </a>
                     </div>

@@ -4,30 +4,30 @@
 
 {% block content %}
 <div class="d-flex justify-content-center align-items-center w-100 bg-dark" style="min-height: 100vh;">
-    <section class="border border-warning p-4 rounded" style="width: 500px; background-color: #212529;">
+    <section class="border border-warning p-4 rounded" style="width: 500px; background-color: #fff;">
         <h3 class="text-center text-warning fw-bold mb-4">Editar Empréstimo [{{ emprestimo.id }}]</h3>
         <form action="{{ url_for('editar_emprestimo', id=emprestimo.id) }}" method="post" class="d-flex flex-column">
             {{ form.csrf_token }}
             {{ form.hidden_tag() }}
 
             <div class="mb-3">
-                {{ form.user_id.label(class="form-label text-warning fw-medium mt-3") }}
-                {{ form.user_id(class="form-control bg-secondary text-light border-0") }}
+                {{ form.user_id.label(class="form-label text-dark fw-medium mt-3") }}
+                {{ form.user_id(class="form-control") }}
             </div>
 
             <div class="mb-3">
-                {{ form.livro_id.label(class="form-label text-warning fw-medium mt-3") }}
-                {{ form.livro_id(class="form-control bg-secondary text-light border-0") }}
+                {{ form.livro_id.label(class="form-label text-dark fw-medium mt-3") }}
+                {{ form.livro_id(class="form-control") }}
             </div>
 
             <div class="mb-3">
-                {{ form.data_emprestimo.label(class="form-label text-warning fw-medium mt-3") }}
-                {{ form.data_emprestimo(class="form-control bg-secondary text-light border-0") }}
+                {{ form.data_emprestimo.label(class="form-label text-dark fw-medium mt-3") }}
+                {{ form.data_emprestimo(class="form-control") }}
             </div>
 
             <div class="mb-3">
-                {{ form.data_devolucao.label(class="form-label text-warning fw-medium mt-3") }}
-                {{ form.data_devolucao(class="form-control bg-secondary text-light border-0") }}
+                {{ form.data_devolucao.label(class="form-label fw-medium mt-3") }}
+                {{ form.data_devolucao(class="form-control") }}
             </div>
 
             {% for field, errors in form.errors.items() %}
