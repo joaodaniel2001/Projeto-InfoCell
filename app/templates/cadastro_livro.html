@@ -11,32 +11,32 @@
             {{ form.hidden_tag() }}
 
             <div class="mb-3">
-                {{ form.user_id.label(class="form-label text-warning fw-medium") }}
-                {{ form.user_id(class="form-control bg-secondary text-light border-0") }}
+                {{ form.user_id.label(class="form-label fw-medium text-warning") }}
+                {{ form.user_id(class="form-select bg-secondary text-light border-0") }}
             </div>
 
             <div class="mb-3">
-                {{ form.livro_id.label(class="form-label text-warning fw-medium") }}
-                {{ form.livro_id(class="form-control bg-secondary text-light border-0") }}
+                {{ form.livro_id.label(class="form-label fw-medium text-warning") }}
+                {{ form.livro_id(class="form-select bg-secondary text-light border-0") }}
             </div>
 
             <div class="mb-3">
-                {{ form.data_emprestimo.label(class="form-label text-warning fw-medium") }}
+                {{ form.data_emprestimo.label(class="form-label fw-medium text-warning") }}
                 {{ form.data_emprestimo(class="form-control bg-secondary text-light border-0") }}
             </div>
 
             <div class="mb-3">
-                {{ form.data_devolucao.label(class="form-label text-warning fw-medium") }}
+                {{ form.data_devolucao.label(class="form-label fw-medium text-warning") }}
                 {{ form.data_devolucao(class="form-control bg-secondary text-light border-0") }}
             </div>
 
             {% for field, errors in form.errors.items() %}
-                {% for error in errors %}
-                    <div class="text-danger mb-2">{{ error }}</div>
-                {% endfor %}
+            {% for error in errors %}
+            <div class="text-danger mb-2">{{ error }}</div>
+            {% endfor %}
             {% endfor %}
 
-            {{ form.btnSubmit(class="btn btn-warning w-100 fw-semibold mt-4") }}
+            {{ form.btnSubmit(class="btn btn-warning fw-semibold mt-4") }}
 
         </form>
     </section>
